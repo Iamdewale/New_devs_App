@@ -1,8 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from decimal import Decimal
 from typing import Dict, Any, List
 
-async def calculate_monthly_revenue(property_id: str, month: int, year: int, db_session=None) -> Decimal:
+async def calculate_monthly_revenue(property_id: str, tenant_id: str, month: int, year: int, db_session=None) -> Decimal:
     """
     Calculates revenue for a specific month.
     """
@@ -17,7 +17,7 @@ async def calculate_monthly_revenue(property_id: str, month: int, year: int, db_
 
     # SQL Simulation (This would be executed against the actual DB)
     query = """
-        SELECT SUM(total_amount) as total
+        SELECT SUM(CAST(total_amount AS DECIMAL(10,2))) as total
         FROM reservations
         WHERE property_id = $1
         AND tenant_id = $2
