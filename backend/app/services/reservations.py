@@ -7,7 +7,7 @@ async def calculate_monthly_revenue(property_id: str, month: int, year: int, db_
     Calculates revenue for a specific month.
     """
 
-    start_date = datetime(year, month, 1)
+    start_date = datetime(year, month, 1, tz)
     if month < 12:
         end_date = datetime(year, month + 1, 1)
     else:
